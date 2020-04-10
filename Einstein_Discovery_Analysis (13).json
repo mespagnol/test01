@@ -1,0 +1,974 @@
+{
+  "Load Open Reqs": {
+    "action": "edgemart",
+    "parameters": {
+      "alias": "OpenReqs_StartFieldTest"
+    }
+  },
+  "AUG_Opp_Sub": {
+    "action": "augment",
+    "parameters": {
+      "right_key": [
+        "OpportunityId"
+      ],
+      "left": "ED_Opportunity_Filter",
+      "left_key": [
+        "Id"
+      ],
+      "right_select": [
+        "Source_System_CreatedBy__c",
+        "Pay_Rate__c",
+        "Burden__c"
+      ],
+      "right": "ED_Submital",
+      "relationship": "OpportunityId",
+      "operation": "LookupSingleValue"
+    }
+  },
+  "ED_Opportunity_Filter": {
+    "action": "filter",
+    "parameters": {
+      "source": "ED_Opportunity",
+      "saqlFilter": "date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [\"1 fiscal_year ago\"..\"current day\"]\n&& 'Req_Division__c' == \"Applications\" && 'OpCo__c' == \"TEKsystems, Inc.\"  && 'RecordTypeName__c' == \"Req\""
+    }
+  },
+  "AUG_Opp_Contact": {
+    "action": "augment",
+    "parameters": {
+      "right_key": [
+        "Id"
+      ],
+      "left": "AUG_Opp_Acct",
+      "left_key": [
+        "Req_Hiring_Manager__c"
+      ],
+      "right_select": [
+        "Customer_Status__c",
+        "Total_Meetings__c",
+        "Total_Filled__c",
+        "Full_Name__c",
+        "Title",
+        "Total_Starts__c",
+        "Total_Formers__c",
+        "Total_ESF__c",
+        "Total_Currents__c",
+        "Former_ESF__c",
+        "Current_ESF__c",
+        "Total_Number_of_Reqs__c"
+      ],
+      "right": "ED_Contact",
+      "relationship": "Contact",
+      "operation": "LookupSingleValue"
+    }
+  },
+  "Slice_Dataset": {
+    "action": "sliceDataset",
+    "parameters": {
+      "mode": "select",
+      "source": "ABTestFlag",
+      "fields": [
+        {
+          "name": "Id"
+        },
+        {
+          "name": "IsWon"
+        },
+        {
+          "name": "Req_Background_Check_Required__c"
+        },
+        {
+          "name": "Req_Bill_Rate_Max__c"
+        },
+        {
+          "name": "Req_Bill_Rate_Min__c"
+        },
+        {
+          "name": "Req_Days_Open__c"
+        },
+        {
+          "name": "Req_Drug_Test_Required__c"
+        },
+        {
+          "name": "Req_Duration_Unit__c"
+        },
+        {
+          "name": "Req_Duration__c"
+        },
+        {
+          "name": "Req_Exclusive__c"
+        },
+        {
+          "name": "Req_Job_Code__c"
+        },
+        {
+          "name": "Req_Job_Title__c"
+        },
+        {
+          "name": "Req_Pay_Rate_Max__c"
+        },
+        {
+          "name": "Req_Pay_Rate_Min__c"
+        },
+        {
+          "name": "Req_Product__c"
+        },
+        {
+          "name": "Req_Red_Zone__c"
+        },
+        {
+          "name": "Req_Segment__c"
+        },
+        {
+          "name": "Req_Skill_Count__c"
+        },
+        {
+          "name": "Req_Terms_of_engagement__c"
+        },
+        {
+          "name": "Req_Total_Positions__c"
+        },
+        {
+          "name": "Req_Worksite_City__c"
+        },
+        {
+          "name": "Req_Worksite_State__c"
+        },
+        {
+          "name": "Global_Account_Name__c"
+        },
+        {
+          "name": "ED_Req_Time_Since_Date_Client_Open_Posit__c"
+        },
+        {
+          "name": "ED_Time_First_Sub_to_Interview__c"
+        },
+        {
+          "name": "ED_Time_from_First_Submittal_to_Close__c"
+        },
+        {
+          "name": "ED_Time_to_First_Submittal__c"
+        },
+        {
+          "name": "ED_Time_to_Interview__c"
+        },
+        {
+          "name": "ED_Contract_PayRate_AVG__c"
+        },
+        {
+          "name": "ED_Permanent_Salary_AVG__c"
+        },
+        {
+          "name": "ED_Account_No_Currents__c"
+        },
+        {
+          "name": "ED_Account_No_Previous_ESF__c"
+        },
+        {
+          "name": "ED_Req_Hiring_Manager_No_Currents__c"
+        },
+        {
+          "name": "ED_Req_Hiring_Manager_No_Formers__c"
+        },
+        {
+          "name": "ED_Req_Hiring_Manager_No_Previous_Filled__c"
+        },
+        {
+          "name": "ED_Req_Hiring_Manager_No_Prev_Meeting__c"
+        },
+        {
+          "name": "ED_Owner_Tenure__c"
+        },
+        {
+          "name": "Req_Sub_Submitted__c"
+        },
+        {
+          "name": "Req_Sub_Interviewing__c"
+        },
+        {
+          "name": "Req_Sub_Offer_Accepted__c"
+        },
+        {
+          "name": "Req_Sub_Not_Proceeding__c"
+        },
+        {
+          "name": "Req_Sub_Started__c"
+        },
+        {
+          "name": "Req_Loss_Wash_Reason__c"
+        },
+        {
+          "name": "Win_Loss_Wash_reason__c"
+        },
+        {
+          "name": "OpportunityId.Pay_Rate__c"
+        },
+        {
+          "name": "OpportunityId.Burden__c"
+        },
+        {
+          "name": "AccountId.Total_Currents__c"
+        },
+        {
+          "name": "AccountId.Total_Formers__c"
+        },
+        {
+          "name": "AccountId.Status_Filter__c"
+        },
+        {
+          "name": "AccountId.Total_ESF__c"
+        },
+        {
+          "name": "AccountId.Total_Starts__c"
+        },
+        {
+          "name": "Contact.Customer_Status__c"
+        },
+        {
+          "name": "Contact.Total_Meetings__c"
+        },
+        {
+          "name": "Contact.Total_Starts__c"
+        },
+        {
+          "name": "Contact.Full_Name__c"
+        },
+        {
+          "name": "OppUser.Office__c"
+        },
+        {
+          "name": "Completeness_Score"
+        }
+      ]
+    }
+  },
+  "AUG_Opp_Users": {
+    "action": "augment",
+    "parameters": {
+      "right_key": [
+        "User_Id__c"
+      ],
+      "left": "AUG_Opp_Contact",
+      "left_key": [
+        "OwnerId"
+      ],
+      "right_select": [
+        "Hire_Date__c",
+        "Name",
+        "Office__c",
+        "Team__c",
+        "User_Id__c",
+        "First_Last_Name__c",
+        "FullPhotoUrl"
+      ],
+      "right": "ED_User",
+      "relationship": "OppUser",
+      "operation": "LookupSingleValue"
+    }
+  },
+  "augment Hiring Manager to Req": {
+    "action": "augment",
+    "parameters": {
+      "right_key": [
+        "Id"
+      ],
+      "left": "ABTestFlag",
+      "left_key": [
+        "Req_Hiring_Manager__c"
+      ],
+      "right_select": [
+        "Total_Currents__c",
+        "Total_Formers__c",
+        "Total_Meetings__c",
+        "Total_Starts__c",
+        "Total_Number_of_Reqs__c",
+        "Full_Name__c"
+      ],
+      "right": "ED_Contact",
+      "relationship": "HiringManager",
+      "operation": "LookupSingleValue"
+    }
+  },
+  "ED_Office_Organization": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "fields": [
+        {
+          "name": "Name"
+        },
+        {
+          "name": "Office_Code__c"
+        },
+        {
+          "name": "Office_Country__c"
+        },
+        {
+          "name": "Office_Name__c"
+        },
+        {
+          "name": "Id"
+        },
+        {
+          "name": "Office_State__c"
+        },
+        {
+          "name": "OpCo_Name__c"
+        },
+        {
+          "name": "OpCo_Code__c"
+        },
+        {
+          "name": "Region_Name__c"
+        },
+        {
+          "name": "Region_Code__c"
+        }
+      ],
+      "object": "User_Organization__c"
+    }
+  },
+  "Register Reqs with Hiring Manager": {
+    "action": "sfdcRegister",
+    "parameters": {
+      "name": "EDQualityCheck_HiringManager",
+      "alias": "EDQualityCheck_HiringManager",
+      "source": "augment Hiring Manager to Req"
+    }
+  },
+  "augment State Code": {
+    "action": "augment",
+    "parameters": {
+      "right_key": [
+        "State_Input"
+      ],
+      "left": "augment Load Open Reqs",
+      "left_key": [
+        "Req_Worksite_State__c"
+      ],
+      "right_select": [
+        "State_Code"
+      ],
+      "right": "ED_List_of_State_Codes_External",
+      "relationship": "StateCode",
+      "operation": "LookupSingleValue"
+    }
+  },
+  "ED_User": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "fields": [
+        {
+          "name": "AccountId"
+        },
+        {
+          "name": "Hire_Date__c"
+        },
+        {
+          "name": "Name"
+        },
+        {
+          "name": "User_Id__c"
+        },
+        {
+          "name": "Team__c"
+        },
+        {
+          "name": "Office__c"
+        },
+        {
+          "name": "First_Last_Name__c"
+        },
+        {
+          "name": "FullPhotoUrl"
+        }
+      ],
+      "object": "User"
+    }
+  },
+  "ED_Submital": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "fields": [
+        {
+          "name": "OpportunityId"
+        },
+        {
+          "name": "Pay_Rate__c"
+        },
+        {
+          "name": "EffectiveDate"
+        },
+        {
+          "name": "Source_System_CreatedBy__c"
+        },
+        {
+          "name": "Burden__c"
+        }
+      ],
+      "object": "Order"
+    }
+  },
+  "REG_Einstein_Discovery_Analysis": {
+    "action": "sfdcRegister",
+    "parameters": {
+      "name": "Einstein_Discovery_Analysis",
+      "alias": "Einstein_Discovery_Analysis",
+      "source": "augment State Code"
+    }
+  },
+  "AUG_Opp_Acct": {
+    "action": "augment",
+    "parameters": {
+      "right_key": [
+        "Id"
+      ],
+      "left": "AUG_Opp_Sub",
+      "left_key": [
+        "AccountId"
+      ],
+      "right_select": [
+        "OwnerId",
+        "Total_Currents__c",
+        "Total_Formers__c",
+        "Status_Filter__c",
+        "Master_Global_Account_Name__c",
+        "Total_Starts__c",
+        "Total_ESF__c"
+      ],
+      "right": "ED_Account",
+      "relationship": "AccountId",
+      "operation": "LookupSingleValue"
+    }
+  },
+  "ED_List_of_State_Codes_External": {
+    "action": "edgemart",
+    "parameters": {
+      "alias": "List_of_States_and_Codes"
+    }
+  },
+  "ED_Opportunity": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "fields": [
+        {
+          "name": "CloseDate"
+        },
+        {
+          "name": "CreatedDate"
+        },
+        {
+          "name": "Id"
+        },
+        {
+          "name": "IsClosed"
+        },
+        {
+          "name": "IsWon"
+        },
+        {
+          "name": "OpCo__c"
+        },
+        {
+          "name": "OwnerId"
+        },
+        {
+          "name": "RecordTypeName__c"
+        },
+        {
+          "name": "Req_Background_Check_Required__c"
+        },
+        {
+          "name": "Req_Bill_Rate_Max__c"
+        },
+        {
+          "name": "Req_Bill_Rate_Min__c"
+        },
+        {
+          "name": "Req_Date_Client_Opened_Position__c"
+        },
+        {
+          "name": "Req_Days_Open__c"
+        },
+        {
+          "name": "Req_Division__c"
+        },
+        {
+          "name": "Req_Drug_Test_Required__c"
+        },
+        {
+          "name": "Req_Duration_Unit__c"
+        },
+        {
+          "name": "Req_Duration__c"
+        },
+        {
+          "name": "Req_Exclusive__c"
+        },
+        {
+          "name": "Req_Interview_Date__c"
+        },
+        {
+          "name": "Req_Job_Code__c"
+        },
+        {
+          "name": "Req_Job_Level__c"
+        },
+        {
+          "name": "Req_Job_Title__c"
+        },
+        {
+          "name": "Req_Pay_Rate_Max__c"
+        },
+        {
+          "name": "Req_Pay_Rate_Min__c"
+        },
+        {
+          "name": "Req_Product__c"
+        },
+        {
+          "name": "Req_Red_Zone__c"
+        },
+        {
+          "name": "Req_Search_Tags_Keywords__c"
+        },
+        {
+          "name": "Req_Segment__c"
+        },
+        {
+          "name": "Req_Skill_Count__c"
+        },
+        {
+          "name": "Req_Standard_Burden__c"
+        },
+        {
+          "name": "Req_Terms_of_engagement__c"
+        },
+        {
+          "name": "Req_Total_Positions__c"
+        },
+        {
+          "name": "Req_Total_Spread__c"
+        },
+        {
+          "name": "Req_Worksite_City__c"
+        },
+        {
+          "name": "Req_Worksite_State__c"
+        },
+        {
+          "name": "StageName"
+        },
+        {
+          "name": "Start_Date__c"
+        },
+        {
+          "name": "Global_Account_Name__c"
+        },
+        {
+          "name": "Req_Hiring_Manager__c"
+        },
+        {
+          "name": "Req_Completion_Score__c"
+        },
+        {
+          "name": "Business_Value__c"
+        },
+        {
+          "name": "Business_Value_BV__c"
+        },
+        {
+          "name": "Probability_of_Award__c"
+        },
+        {
+          "name": "Probability"
+        },
+        {
+          "name": "AccountId"
+        },
+        {
+          "name": "CampaignId"
+        },
+        {
+          "name": "Source_System_Id__c"
+        },
+        {
+          "name": "Req_Priority_Score__c"
+        },
+        {
+          "name": "Name"
+        },
+        {
+          "name": "Organization_Office__c"
+        },
+        {
+          "name": "ED_Req_Time_Since_Date_Client_Open_Posit__c"
+        },
+        {
+          "name": "ED_Time_First_Sub_to_Interview__c"
+        },
+        {
+          "name": "ED_Time_from_First_Submittal_to_Close__c"
+        },
+        {
+          "name": "ED_Time_to_First_Submittal__c"
+        },
+        {
+          "name": "ED_Time_to_Interview__c"
+        },
+        {
+          "name": "ED_Contract_PayRate_AVG__c"
+        },
+        {
+          "name": "ED_Permanent_Salary_AVG__c"
+        },
+        {
+          "name": "ED_Account_No_Currents__c"
+        },
+        {
+          "name": "ED_Account_No_Formers__c"
+        },
+        {
+          "name": "ED_Account_No_Previous_ESF__c"
+        },
+        {
+          "name": "ED_Req_Hiring_Manager_No_Currents__c"
+        },
+        {
+          "name": "ED_Req_Hiring_Manager_No_Formers__c"
+        },
+        {
+          "name": "ED_Req_Hiring_Manager_No_Previous_Filled__c"
+        },
+        {
+          "name": "ED_Req_Hiring_Manager_No_Prev_Meeting__c"
+        },
+        {
+          "name": "ED_Owner_Tenure__c"
+        },
+        {
+          "name": "ED_Outcome__c"
+        },
+        {
+          "name": "ED_Prediction__c"
+        },
+        {
+          "name": "ED_Prescription__c"
+        },
+        {
+          "name": "Req_Sub_Submitted__c"
+        },
+        {
+          "name": "Req_Sub_Interviewing__c"
+        },
+        {
+          "name": "Req_Sub_Offer_Accepted__c"
+        },
+        {
+          "name": "Req_Sub_Not_Proceeding__c"
+        },
+        {
+          "name": "Req_Sub_Started__c"
+        },
+        {
+          "name": "Req_Total_Filled__c"
+        },
+        {
+          "name": "Req_Loss_Wash_Reason__c"
+        },
+        {
+          "name": "Win_Loss_Wash_reason__c"
+        },
+        {
+          "name": "First_Submittal_Date__c"
+        },
+        {
+          "name": "First_Interview_Date__c"
+        },
+        {
+          "name": "Stage_Order__c"
+        },
+        {
+          "name": "ED_RefreshCount__c"
+        }
+      ],
+      "object": "Opportunity"
+    }
+  },
+  "ED_Contact": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "fields": [
+        {
+          "name": "AccountId"
+        },
+        {
+          "name": "Contact_Id__c"
+        },
+        {
+          "name": "Id"
+        },
+        {
+          "name": "OwnerId"
+        },
+        {
+          "name": "Customer_Status__c"
+        },
+        {
+          "name": "Total_Meetings__c"
+        },
+        {
+          "name": "Former_ESF__c"
+        },
+        {
+          "name": "Current_ESF__c"
+        },
+        {
+          "name": "Total_Filled__c"
+        },
+        {
+          "name": "Total_Starts__c"
+        },
+        {
+          "name": "Total_ESF__c"
+        },
+        {
+          "name": "Total_Currents__c"
+        },
+        {
+          "name": "Total_Formers__c"
+        },
+        {
+          "name": "Full_Name__c"
+        },
+        {
+          "name": "Title"
+        },
+        {
+          "name": "Total_Number_of_Reqs__c"
+        }
+      ],
+      "object": "Contact"
+    }
+  },
+  "AUG_Opp_UserOrg": {
+    "action": "augment",
+    "parameters": {
+      "right_key": [
+        "Id"
+      ],
+      "left": "AUG_Opp_Users",
+      "left_key": [
+        "Organization_Office__c"
+      ],
+      "right_select": [
+        "Name",
+        "Office_Code__c",
+        "Office_Country__c",
+        "Office_Name__c",
+        "Office_State__c",
+        "OpCo_Code__c",
+        "OpCo_Name__c",
+        "Region_Code__c",
+        "Region_Name__c"
+      ],
+      "right": "ED_Office_Organization",
+      "relationship": "Organization_Office__c",
+      "operation": "LookupSingleValue"
+    }
+  },
+  "ED_Account": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "fields": [
+        {
+          "name": "OwnerId"
+        },
+        {
+          "name": "Id"
+        },
+        {
+          "name": "Total_Currents__c"
+        },
+        {
+          "name": "Total_Formers__c"
+        },
+        {
+          "name": "Status_Filter__c"
+        },
+        {
+          "name": "Total_ESF__c"
+        },
+        {
+          "name": "Master_Global_Account_Name__c"
+        },
+        {
+          "name": "Total_Starts__c"
+        }
+      ],
+      "object": "Account"
+    }
+  },
+  "ABTestFlag": {
+    "action": "computeExpression",
+    "parameters": {
+      "source": "AUG_Opp_ContactRole",
+      "mergeWithSource": true,
+      "computedFields": [
+        {
+          "saqlExpression": "\ncase when 'Organization_Office__c.Name' in [\"TEK-Austin, TX-00045\", \"TEK-Austin, TX-30045\", \"TEK-Chicago-Downers Grove,IL-00606\", \"TEK-Chicago/Downers Grove, IL-30606\", \"TEK-Columbus Apps, OH-00583\", \"TEK-Columbus, OH-01152\", \"TEK-Columbus, OH-30583\", \"TEK-Minneapolis Apps-00053\", \"TEK-Minneapolis, MN-  Training-20053\", \"TEK-Minneapolis, MN-01091\"] then \"Test Offices\" when 'Organization_Office__c.Name' in [\"TEK-Chicago Apps, IL-00528\", \"TEK-Chicago Apps, IL-30528\", \"TEK-Chicago, IL-01147\", \"TEK-Cincinnati, OH-00611\", \"TEK-Cincinnati, OH-30611\", \"TEK-Denver North, CO-00510\", \"TEK-Denver North, CO-30510\", \"TEK-Denver, CO-00054\", \"TEK-Denver, CO-30054\", \"TEK-Detroit East, MI-00560\", \"TEK-Detroit West, MI-01140\", \"TEK-Raleigh Downtown, NC-31255\", \"TEK-Raleigh East,  NC-01255\", \"TEK-Raleigh, NC-00591\", \"TEK-Raleigh, NC-30591\", \"TEK-Schaumburg Apps, IL-01371\", \"TEK-Schaumburg Apps, IL-31371\", \"TEK-Schaumburg, IL-00536\", \"TEK-Schaumburg, IL-30536\", \"TEK-St. Louis, MO-00517\", \"TEK-St.Louis, MO-30517\"] then \"Control Offices\" else \"Other\" end",
+          "name": "TestControlOfficeFlag",
+          "label": "Test Control Office Flag",
+          "type": "Text"
+        },
+        {
+          "name": "StatusFlag",
+          "saqlExpression": "case when 'StageName' in [\"Closed Won\", \"Closed Wash\", \"Closed Lost\", \"Closed Won (Partial)\"] then \"Closed\"  else \"Open\" end",
+          "label": "StatusFlag",
+          "type": "Text"
+        },
+        {
+          "name": "IsClosedWonFlag",
+          "saqlExpression": "case when 'StageName' in [\"Closed Won\", \"Closed Won (Partial)\"] then \"Won\"  else \"Lost\" end",
+          "label": "IsClosedWonFlag",
+          "type": "Text"
+        },
+        {
+          "name": "Score_Group",
+          "saqlExpression": "case \nwhen 'ED_Outcome__c' >=0 && 'ED_Outcome__c' <=10 then \"0-10\" \nwhen 'ED_Outcome__c' >10 && 'ED_Outcome__c' <=20 then \"10-20\" \nwhen 'ED_Outcome__c' >20 && 'ED_Outcome__c' <=30 then \"20-30\" \nwhen 'ED_Outcome__c' >30 && 'ED_Outcome__c' <=40 then \"30-40\" \nwhen 'ED_Outcome__c' >40 && 'ED_Outcome__c' <=50 then \"40-50\" \nwhen 'ED_Outcome__c' >50 && 'ED_Outcome__c' <=60 then \"50-60\"\nwhen 'ED_Outcome__c' >60 && 'ED_Outcome__c' <=70 then \"60-70\" \nwhen 'ED_Outcome__c' >70 && 'ED_Outcome__c' <=80 then \"70-80\"\nwhen 'ED_Outcome__c' >80 && 'ED_Outcome__c' <=90 then \"80-90\"\nelse \"90-100\" end",
+          "label": "Score_Group",
+          "type": "Text"
+        },
+        {
+          "name": "Priority_Group",
+          "saqlExpression": "case \nwhen 'ED_Outcome__c' >=0 && 'ED_Outcome__c' <=30 then \"0-30\" when 'ED_Outcome__c' >30 && 'ED_Outcome__c' <=70 then \"30-70\"\nelse \"70-100\" end",
+          "label": "Priority_Group",
+          "type": "Text"
+        },
+        {
+          "precision": 16,
+          "name": "SubmittalRatio",
+          "saqlExpression": "('Req_Sub_Started__c'+'Req_Sub_Offer_Accepted__c')/('Req_Sub_Submitted__c' + 'Req_Sub_Started__c' + 'Req_Sub_Interviewing__c' + 'Req_Sub_Not_Proceeding__c' + 'Req_Sub_Offer_Accepted__c')",
+          "scale": 2,
+          "label": "Submittal to Start Ratio",
+          "type": "Numeric"
+        },
+        {
+          "precision": 16,
+          "name": "PositionWinRate",
+          "saqlExpression": "('Req_Sub_Started__c'+'Req_Sub_Offer_Accepted__c')/ 'Req_Total_Positions__c'",
+          "scale": 2,
+          "label": "Position Win Rate",
+          "type": "Numeric"
+        },
+        {
+          "name": "Group_Days_Open",
+          "saqlExpression": "case when 'Req_Days_Open__c' <1 then \"1 Day\" when  'Req_Days_Open__c' <7 then \"1 Week\" when 'Req_Days_Open__c' <14 then \"2 Weeks\" when 'Req_Days_Open__c' <28 then \"4 Weeks\" when 'Req_Days_Open__c' <52 then \"8 Weeks\" when 'Req_Days_Open__c' >=52 then \">8 Weeks\" else \"na\" end ",
+          "label": "Group Days Open",
+          "type": "Text"
+        },
+        {
+          "name": "Group_Account_Total_Starts",
+          "saqlExpression": "case when 'AccountId.Total_Starts__c' <1 then \"<01\" when  'AccountId.Total_Starts__c' <2 then \"<02\" when 'AccountId.Total_Starts__c' <3 then \"<03\" when 'AccountId.Total_Starts__c' <5 then \"<05\" when 'AccountId.Total_Starts__c' <10 then \"<10\" when \n\n'AccountId.Total_Starts__c' <20 then \"<20\" when 'AccountId.Total_Starts__c' <30 then \"<30\" when 'AccountId.Total_Starts__c' <50 then \"<50\" when 'AccountId.Total_Starts__c' <99 then \"<99\" when 'AccountId.Total_Starts__c' >=99 then \">=99\" else \"na\" end ",
+          "label": "Group Account Total Starts",
+          "type": "Text"
+        },
+        {
+          "name": "Group_Hiring_Manager_Total_Starts",
+          "saqlExpression": "case when 'Contact.Total_Starts__c' <1 then \"<01\" when  'Contact.Total_Starts__c' <3 then \"<03\" when 'Contact.Total_Starts__c' <6 then \"<06\" when 'Contact.Total_Starts__c' <10 then \"<10\" when 'Contact.Total_Starts__c' >=10 then \">=10\" else \"na\" end ",
+          "label": "Group Hiring Manager Total Starts",
+          "type": "Text"
+        },
+        {
+          "name": "Group_Time_to_First_Submittal",
+          "saqlExpression": "case when 'ED_Time_to_First_Submittal__c' <1 then \"1 Day\" when  'ED_Time_to_First_Submittal__c' <7 then \"1 Week\" when 'ED_Time_to_First_Submittal__c' <14 then \"2 Weeks\" when 'ED_Time_to_First_Submittal__c' <28 then \"4 Weeks\" when 'ED_Time_to_First_Submittal__c' <52 then \"8 Weeks\" when 'ED_Time_to_First_Submittal__c' >=52 then \">8 Weeks\" else \"na\" end ",
+          "label": "Group Time to First Submittal",
+          "type": "Text"
+        },
+        {
+          "name": "Group_Time_to_Interview",
+          "saqlExpression": "case when 'ED_Time_to_Interview__c' <1 then \"1 Day\" when  'ED_Time_to_Interview__c' <7 then \"1 Week\" when 'ED_Time_to_Interview__c' <14 then \"2 Weeks\" when 'ED_Time_to_Interview__c' <28 then \"4 Weeks\" when 'ED_Time_to_Interview__c' <52 then \"8 Weeks\" when 'ED_Time_to_Interview__c' >=52 then \">8 Weeks\" else \"na\" end ",
+          "label": "Group Time to Interview",
+          "type": "Text"
+        },
+        {
+          "name": "Group_Hiring_Manager_Total_Meetings",
+          "saqlExpression": "case when 'Contact.Total_Meetings__c' <1 then \"<01\" when 'Contact.Total_Meetings__c' <2 then \"<02\" when 'Contact.Total_Meetings__c' <4 then \"<04\" when 'Contact.Total_Meetings__c' <8 then \"<08\" when 'Contact.Total_Meetings__c' <15 then \"<15\" when 'Contact.Total_Meetings__c' >=15 then \">=15\" else \"na\" end",
+          "label": "Group Hiring Manager Total Meetings",
+          "type": "Text"
+        },
+        {
+          "name": "Group_Time_First_Submittal_to_Interview",
+          "saqlExpression": "case when 'ED_Time_First_Sub_to_Interview__c' <1 then \"1 Day\" when  'ED_Time_First_Sub_to_Interview__c' <7 then \"1 Week\" when 'ED_Time_First_Sub_to_Interview__c' <14 then \"2 Weeks\" when 'ED_Time_First_Sub_to_Interview__c' <28 then \"4 Weeks\" when 'ED_Time_First_Sub_to_Interview__c' <52 then \"8 Weeks\" when 'ED_Time_First_Sub_to_Interview__c' >=52 then \">8 Weeks\" else \"na\" end ",
+          "label": "Group Time First Submittal to Interview",
+          "type": "Text"
+        },
+        {
+          "saqlExpression": "case when substr('Req_Completion_Score__c', 57,3) == \"Red\" then \"Red\" when substr('Req_Completion_Score__c', 57,6) == \"Yellow\" then \"Yellow\" when substr('Req_Completion_Score__c', 57,5) == \"Green\" then \"Green\" else null end",
+          "name": "Completeness_Score",
+          "label": "Completeness Score",
+          "type": "Text"
+        }
+      ]
+    }
+  },
+  "AUG_Opp_ContactRole": {
+    "action": "augment",
+    "parameters": {
+      "right_key": [
+        "OpportunityId"
+      ],
+      "left": "AUG_Opp_UserOrg",
+      "left_key": [
+        "Id"
+      ],
+      "right_select": [
+        "Role"
+      ],
+      "right": "ED_OpportunityContactRole",
+      "relationship": "OpportunityId",
+      "operation": "LookupSingleValue"
+    }
+  },
+  "Reg_Win_Probability": {
+    "action": "sfdcRegister",
+    "parameters": {
+      "name": "Win Probability Dataset",
+      "alias": "Reg_Win_Probability",
+      "source": "Slice_Dataset"
+    }
+  },
+  "ED_OpportunityContactRole": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "fields": [
+        {
+          "name": "ContactId"
+        },
+        {
+          "name": "Role"
+        },
+        {
+          "name": "OpportunityId"
+        }
+      ],
+      "object": "OpportunityContactRole"
+    }
+  },
+  "augment Load Open Reqs": {
+    "action": "augment",
+    "parameters": {
+      "right_key": [
+        "Opportunity_ID"
+      ],
+      "left": "ABTestFlag",
+      "left_key": [
+        "Id"
+      ],
+      "right_select": [
+        "Open_Start_FieldTest"
+      ],
+      "right": "Load Open Reqs",
+      "relationship": "OpenReqs",
+      "operation": "LookupSingleValue"
+    }
+  }
+}
