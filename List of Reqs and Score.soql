@@ -1,0 +1,1 @@
+select Id, Name, Opco__c, Req_Division__c, StageName, RecordTypeName__c, ED_Outcome__c, ED_Prediction__c, ED_Prescription__c from Opportunity where RecordTypeName__c = 'Req' and Opco__c = 'TEKSystems, Inc.' and Req_Division__c = 'Applications' and IsClosed = false
