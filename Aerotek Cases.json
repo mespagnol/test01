@@ -1,0 +1,251 @@
+{
+  "Sfdc_User": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "fields": [
+        {
+          "name": "City"
+        },
+        {
+          "name": "CompanyName"
+        },
+        {
+          "name": "Country"
+        },
+        {
+          "name": "Division__c"
+        },
+        {
+          "name": "Email"
+        },
+        {
+          "name": "FirstName"
+        },
+        {
+          "name": "Id"
+        },
+        {
+          "name": "LastName"
+        },
+        {
+          "name": "Name"
+        },
+        {
+          "name": "MobilePhone"
+        },
+        {
+          "name": "Office_Code__c"
+        },
+        {
+          "name": "Office__c"
+        },
+        {
+          "name": "OPCO__c"
+        },
+        {
+          "name": "Region__c"
+        },
+        {
+          "name": "Region_Code__c"
+        },
+        {
+          "name": "State"
+        },
+        {
+          "name": "Title"
+        },
+        {
+          "name": "UserRoleId"
+        },
+        {
+          "name": "Business_Unit__c"
+        },
+        {
+          "name": "Business_Unit_Region__c"
+        }
+      ],
+      "object": "User"
+    }
+  },
+  "AerotekCases": {
+    "action": "sfdcRegister",
+    "parameters": {
+      "name": "AerotekCases",
+      "alias": "AerotekCases",
+      "source": "Aug_Cases_Contact"
+    }
+  },
+  "Aerotek_Case_Filter": {
+    "action": "filter",
+    "parameters": {
+      "source": "Sfdc_Cases",
+      "saqlFilter": "Owner_Office_Name__c matches \"ONS\""
+    }
+  },
+  "Aug_Cases_Contact": {
+    "action": "augment",
+    "parameters": {
+      "right_key": [
+        "Id"
+      ],
+      "left": "Aug_Cases_User",
+      "left_key": [
+        "ContactId"
+      ],
+      "right_select": [
+        "Mailing_Address_Formatted__c",
+        "Name",
+        "Preferred_Email__c",
+        "Record_Type_Name__c",
+        "Talent_Ownership__c",
+        "Title"
+      ],
+      "right": "Sfdc_Contact",
+      "relationship": "Contact",
+      "operation": "LookupSingleValue"
+    }
+  },
+  "Sfdc_Cases": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "fields": [
+        {
+          "name": "AccountId"
+        },
+        {
+          "name": "CaseNumber"
+        },
+        {
+          "name": "Case_Description__c"
+        },
+        {
+          "name": "ClosedDate"
+        },
+        {
+          "name": "ContactEmail"
+        },
+        {
+          "name": "ContactId"
+        },
+        {
+          "name": "CreatedById"
+        },
+        {
+          "name": "CreatedDate"
+        },
+        {
+          "name": "Description"
+        },
+        {
+          "name": "Id"
+        },
+        {
+          "name": "isRedZone__c"
+        },
+        {
+          "name": "LastModifiedById"
+        },
+        {
+          "name": "LastModifiedDate"
+        },
+        {
+          "name": "Office_Talent__c"
+        },
+        {
+          "name": "OwnerId"
+        },
+        {
+          "name": "Type"
+        },
+        {
+          "name": "Owner_Office_Name__c"
+        },
+        {
+          "name": "Owner_Office__c"
+        },
+        {
+          "name": "Owner_Region_Name__c"
+        },
+        {
+          "name": "RecordTypeId"
+        },
+        {
+          "name": "Status"
+        },
+        {
+          "name": "Subject"
+        },
+        {
+          "name": "TC_Retention_Profile__c"
+        },
+        {
+          "name": "IsClosed"
+        }
+      ],
+      "object": "Case"
+    }
+  },
+  "Sfdc_Contact": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "fields": [
+        {
+          "name": "Id"
+        },
+        {
+          "name": "Name"
+        },
+        {
+          "name": "Record_Type_Name__c"
+        },
+        {
+          "name": "Preferred_Email__c"
+        },
+        {
+          "name": "Mailing_Address_Formatted__c"
+        },
+        {
+          "name": "Title"
+        },
+        {
+          "name": "Talent_Ownership__c"
+        }
+      ],
+      "object": "Contact"
+    }
+  },
+  "Aug_Cases_User": {
+    "action": "augment",
+    "parameters": {
+      "right_key": [
+        "Id"
+      ],
+      "left": "Aerotek_Case_Filter",
+      "left_key": [
+        "OwnerId"
+      ],
+      "right_select": [
+        "CompanyName",
+        "City",
+        "Country",
+        "Division__c",
+        "Email",
+        "FirstName",
+        "LastName",
+        "Name",
+        "Office_Code__c",
+        "Office__c",
+        "OPCO__c",
+        "Region_Code__c",
+        "Region__c",
+        "Title",
+        "State",
+        "Business_Unit__c",
+        "Business_Unit_Region__c"
+      ],
+      "right": "Sfdc_User",
+      "relationship": "CaseOwner",
+      "operation": "LookupSingleValue"
+    }
+  }
+}
